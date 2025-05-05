@@ -16,6 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 public class User extends Member {
 
+    @Column(unique = true)
+    private String elderlyId; // 노인 고유 코드
+
     @Column
     private LocalDate birthDate;
 

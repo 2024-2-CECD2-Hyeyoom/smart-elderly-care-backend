@@ -15,8 +15,11 @@ import java.util.List;
 @AllArgsConstructor
 public class Caregiver extends Member {
 
-    @ElementCollection
-    @CollectionTable(name = "caregiver_elderly_ids", joinColumns = @JoinColumn(name = "caregiver_id"))
-    @Column(name = "elderly_id")
-    private List<String> elderlyIds;
+    @ManyToMany
+    @JoinTable(
+            name = "caregiver_user",
+            joinColumns = @JoinColumn(name = "caregiver_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> elderlyList;
 }
