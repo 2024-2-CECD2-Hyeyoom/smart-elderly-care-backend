@@ -50,7 +50,7 @@ public class ProfileService {
      */
     public CaregiverProfileDTO getCaregiverProfile(Long caregiverId) {
         Caregiver caregiver = caregiverRepository.findById(caregiverId)
-                .orElseThrow(() -> new CareClientException(ErrorStatus.USER_NOT_FOUND));
+                .orElseThrow(() -> new CareClientException(ErrorStatus.CAREGIVER_NOT_FOUND));
 
         CaregiverProfileDTO dto = new CaregiverProfileDTO();
         dto.setCaregiverId(caregiver.getId());
@@ -78,7 +78,7 @@ public class ProfileService {
      */
     public StaffProfileDTO getStaffProfile(Long staffId) {
         Staff staff = staffRepository.findById(staffId)
-                .orElseThrow(() -> new CareClientException(ErrorStatus.USER_NOT_FOUND));
+                .orElseThrow(() -> new CareClientException(ErrorStatus.STAFF_NOT_FOUND));
 
         StaffProfileDTO dto = new StaffProfileDTO();
         dto.setStaffId(staff.getId());
