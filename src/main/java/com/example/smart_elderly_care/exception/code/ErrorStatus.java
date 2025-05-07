@@ -25,10 +25,13 @@ public enum ErrorStatus implements BaseErrorCode {
     INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "AUTH_006", "비밀번호가 일치하지 않습니다."),
 
     // User 관련
-    USER_NOT_FOUND(HttpStatus.NOT_FOUND, "USER_001", "존재하지 않는 사용자입니다."),
-    PHONE_ALREADY_EXISTS(HttpStatus.INTERNAL_SERVER_ERROR, "USER_002", "이미 등록된 전화번호입니다."),
-    USER_DELETE_FAILED(HttpStatus.NOT_FOUND, "USER_003", "회원 탈퇴에 실패했습니다."),
-    ELDERLY_CODE_NOT_EXISTS(HttpStatus.INTERNAL_SERVER_ERROR, "USER_004", "일치하는 고유 코드가 없습니다."),
+    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "USER_001", "존재하지 않는 사용자입니다."),
+    USER_NOT_FOUND(HttpStatus.NOT_FOUND, "USER_002", "존재하지 않는 사용자(일반 사용자)입니다."),
+    CAREGIVER_NOT_FOUND(HttpStatus.NOT_FOUND, "USER_003", "존재하지 않는 사용자(보호자)입니다."),
+    STAFF_NOT_FOUND(HttpStatus.NOT_FOUND, "USER_004", "존재하지 않는 사용자(복지센터 담당자)입니다."),
+    PHONE_ALREADY_EXISTS(HttpStatus.NOT_FOUND, "USER_005", "이미 등록된 전화번호입니다."),
+    USER_DELETE_FAILED(HttpStatus.NOT_FOUND, "USER_006", "회원 탈퇴에 실패했습니다."),
+    ELDERLY_CODE_NOT_EXISTS(HttpStatus.NOT_FOUND, "USER_007", "일치하는 고유 코드가 없습니다."),
     ;
 
     private final HttpStatus httpStatus;

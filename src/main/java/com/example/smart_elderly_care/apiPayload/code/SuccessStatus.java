@@ -25,6 +25,11 @@ public enum SuccessStatus implements BaseCode {
     USER_PROFILE_OK(HttpStatus.OK, "PROFILE2001", "일반 회원 프로필 조회 성공"),
     CAREGIVER_PROFILE_OK(HttpStatus.OK, "PROFILE2002", "보호자 회원 프로필 조회 성공"),
     STAFF_PROFILE_OK(HttpStatus.OK, "PROFILE2003", "담당자 회원 프로필 조회 성공"),
+
+    // 대상자 관리
+    CARE_TARGETS_OK(HttpStatus.OK, "CARE2001", "돌봄 대상자 조회 성공"),
+    CARE_HISTORY_ADD_OK(HttpStatus.OK, "CARE2002", "대상자 돌봄 이력 추가 성공"),
+    CARE_HISTORY_OK(HttpStatus.OK, "CARE2003", "대상자 돌봄 이력 조회 성공"),
     ;
 
     private final HttpStatus httpStatus;
