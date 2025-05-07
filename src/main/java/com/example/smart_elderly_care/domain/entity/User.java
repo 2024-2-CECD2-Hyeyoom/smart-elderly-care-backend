@@ -29,4 +29,8 @@ public class User extends Member {
     @CollectionTable(name = "member_underlying_diseases", joinColumns = @JoinColumn(name = "member_id"))
     @Column(name = "underlying_disease")
     private List<String> underlyingDiseases;
+
+    // 유저 상태 추가
+    @Column
+    private int careStatus;
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public class UserSignupDTO {
     private String name;
     private String phone;
-    private String gender;
+    private int gender;
     private LocalDate birthDate;
     private String address;
     private Long welfareCenterId;

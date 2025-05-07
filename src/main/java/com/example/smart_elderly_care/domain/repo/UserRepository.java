@@ -8,6 +8,8 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+
     List<User> findByElderlyIdIn(List<String> elderlyIds);
     boolean existsByPhone(String phone);
+    List<User> findByWelfareCenterId(Long welfareCenterId);
 }
