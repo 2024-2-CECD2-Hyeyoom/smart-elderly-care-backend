@@ -8,7 +8,7 @@ import java.util.List;
 public class StaffSignupDTO {
     private String name;
     private String phone;
-    private String gender;
+    private int gender;
     private String address;
     private Long welfareCenterId;
     private String password;

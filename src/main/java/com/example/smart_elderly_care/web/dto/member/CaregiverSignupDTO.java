@@ -9,7 +9,7 @@ import java.util.List;
 public class CaregiverSignupDTO {
     private String name;
     private String phone;
-    private String gender;
+    private int gender;
     private String address;
     private List<String> elderlyIds;
     private String password;

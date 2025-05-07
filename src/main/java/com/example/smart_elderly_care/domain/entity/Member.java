@@ -6,7 +6,6 @@ import lombok.experimental.SuperBuilder;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "member_type")
 @Getter
 @Setter
 @SuperBuilder
@@ -22,7 +21,7 @@ public abstract class Member {
     private String name;
 
     @Column(length = 10)
-    private String gender;
+    private int gender;
 
     @Column(nullable = false, length = 15, unique = true)
     private String phone;
