@@ -2,7 +2,7 @@ package com.example.smart_elderly_care.web.controller.care;
 
 import com.example.smart_elderly_care.apiPayload.ApiResponse;
 import com.example.smart_elderly_care.apiPayload.code.SuccessStatus;
-import com.example.smart_elderly_care.service.care.CareService;
+import com.example.smart_elderly_care.service.CareService;
 import com.example.smart_elderly_care.web.dto.care.CareHistoryDTO;
 import com.example.smart_elderly_care.web.dto.care.CareHistoryResponseDTO;
 import com.example.smart_elderly_care.web.dto.care.CareTargetResponseDTO;

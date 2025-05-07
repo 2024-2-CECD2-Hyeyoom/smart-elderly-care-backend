@@ -1,4 +1,4 @@
-package com.example.smart_elderly_care.service.care;
+package com.example.smart_elderly_care.service;
 
 import com.example.smart_elderly_care.domain.entity.*;
 import com.example.smart_elderly_care.domain.repo.*;
