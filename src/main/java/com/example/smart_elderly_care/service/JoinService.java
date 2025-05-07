@@ -42,6 +42,7 @@ public class JoinService {
                 .underlyingDiseases(dto.getUnderlyingDiseases())
                 .elderlyId(generatedElderlyId)
                 .password(bCryptPasswordEncoder.encode(dto.getPassword()))
+                .careStatus(0) // 기본 0이 정상
                 .role(Member.Role.USER)
                 .build();
         userRepository.save(user);
