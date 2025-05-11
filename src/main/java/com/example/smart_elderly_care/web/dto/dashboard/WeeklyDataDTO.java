@@ -9,7 +9,8 @@ public class WeeklyDataDTO {
     private Period period;
     private List<String> labels;
     private DataSection data;
-    private Summary summary;
+    private double averageCurrentWeek;
+    private double averagePreviousWeek;
 
     @Data
     public static class Period {
@@ -29,9 +30,4 @@ public class WeeklyDataDTO {
         private List<Double> previousWeek;
     }
 
-    @Data
-    public static class Summary {
-        private double averageCurrentWeek;
-        private double averagePreviousWeek;
-    }
 }
