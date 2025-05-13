@@ -3,9 +3,7 @@ package com.example.smart_elderly_care.web.controller.member;
 import com.example.smart_elderly_care.apiPayload.ApiResponse;
 import com.example.smart_elderly_care.apiPayload.code.SuccessStatus;
 import com.example.smart_elderly_care.service.ProfileService;
-import com.example.smart_elderly_care.web.dto.member.CaregiverProfileDTO;
-import com.example.smart_elderly_care.web.dto.member.StaffProfileDTO;
-import com.example.smart_elderly_care.web.dto.member.UserProfileDTO;
+import com.example.smart_elderly_care.web.dto.member.ProfileDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +20,8 @@ public class ProfileController {
      */
     @Operation(summary = "일반회원 마이페이지 조회 API", description = "일반회원(독거노인) 마이페이지 조회 결과입니다.")
     @GetMapping("/user/{userId}")
-    public ApiResponse<UserProfileDTO> getUserProfile(@PathVariable Long userId) {
-        UserProfileDTO dto = profileService.getUserProfile(userId);
+    public ApiResponse<ProfileDTO.UserProfileDTO> getUserProfile(@PathVariable Long userId) {
+        ProfileDTO.UserProfileDTO dto = profileService.getUserProfile(userId);
         return ApiResponse.of(SuccessStatus.USER_PROFILE_OK, dto);
     }
 
@@ -32,8 +30,8 @@ public class ProfileController {
      */
     @Operation(summary = "보호자 마이페이지 조회 API", description = "보호자 마이페이지 조회 결과입니다.")
     @GetMapping("/caregiver/{caregiverId}")
-    public ApiResponse<CaregiverProfileDTO> getCaregiverProfile(@PathVariable Long caregiverId) {
-        CaregiverProfileDTO dto = profileService.getCaregiverProfile(caregiverId);
+    public ApiResponse<ProfileDTO.CaregiverProfileDTO> getCaregiverProfile(@PathVariable Long caregiverId) {
+        ProfileDTO.CaregiverProfileDTO dto = profileService.getCaregiverProfile(caregiverId);
         return ApiResponse.of(SuccessStatus.CAREGIVER_PROFILE_OK, dto);
     }
 
@@ -42,8 +40,8 @@ public class ProfileController {
      */
     @Operation(summary = "담당자 마이페이지 조회 API", description = "담당자 마이페이지 조회 결과입니다.")
     @GetMapping("/staff/{staffId}")
-    public ApiResponse<StaffProfileDTO> getStaffProfile(@PathVariable Long staffId) {
-        StaffProfileDTO dto = profileService.getStaffProfile(staffId);
+    public ApiResponse<ProfileDTO.StaffProfileDTO> getStaffProfile(@PathVariable Long staffId) {
+        ProfileDTO.StaffProfileDTO dto = profileService.getStaffProfile(staffId);
         return ApiResponse.of(SuccessStatus.STAFF_PROFILE_OK, dto);
     }
 }

@@ -9,9 +9,7 @@ import com.example.smart_elderly_care.domain.repo.CaregiverRepository;
 import com.example.smart_elderly_care.domain.repo.StaffRepository;
 import com.example.smart_elderly_care.domain.repo.UserRepository;
 
-import com.example.smart_elderly_care.web.dto.member.CaregiverProfileDTO;
-import com.example.smart_elderly_care.web.dto.member.StaffProfileDTO;
-import com.example.smart_elderly_care.web.dto.member.UserProfileDTO;
+import com.example.smart_elderly_care.web.dto.member.ProfileDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,18 +25,18 @@ public class ProfileService {
     /**
      * 일반 사용자(노인) 프로필 조회
      */
-    public UserProfileDTO getUserProfile(Long userId) {
+    public ProfileDTO.UserProfileDTO getUserProfile(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new CareClientException(ErrorStatus.USER_NOT_FOUND));
 
-        UserProfileDTO dto = new UserProfileDTO();
+        ProfileDTO.UserProfileDTO dto = new ProfileDTO.UserProfileDTO();
         dto.setUserId(user.getId());
         dto.setName(user.getName());
         dto.setGender(user.getGender());
         dto.setBirthDate(java.sql.Date.valueOf(user.getBirthDate()));
         dto.setAddress(user.getAddress());
         dto.setElderlyId(user.getElderlyId());
-        dto.setWelfareCenterId(user.getWelfareCenterId().intValue());
+        dto.setWelfareCenterName(user.getWelfareCenter().getOrganName());
         dto.setPhone(user.getPhone());
         dto.setUnderlyingDiseases(user.getUnderlyingDiseases());
 
@@ -48,11 +46,11 @@ public class ProfileService {
     /**
      * 돌봄 제공자 프로필 조회
      */
-    public CaregiverProfileDTO getCaregiverProfile(Long caregiverId) {
+    public ProfileDTO.CaregiverProfileDTO getCaregiverProfile(Long caregiverId) {
         Caregiver caregiver = caregiverRepository.findById(caregiverId)
                 .orElseThrow(() -> new CareClientException(ErrorStatus.CAREGIVER_NOT_FOUND));
 
-        CaregiverProfileDTO dto = new CaregiverProfileDTO();
+        ProfileDTO.CaregiverProfileDTO dto = new ProfileDTO.CaregiverProfileDTO();
         dto.setCaregiverId(caregiver.getId());
         dto.setName(caregiver.getName());
         dto.setPhone(caregiver.getPhone());
@@ -76,15 +74,15 @@ public class ProfileService {
     /**
      * 복지 담당자 프로필 조회
      */
-    public StaffProfileDTO getStaffProfile(Long staffId) {
+    public ProfileDTO.StaffProfileDTO getStaffProfile(Long staffId) {
         Staff staff = staffRepository.findById(staffId)
                 .orElseThrow(() -> new CareClientException(ErrorStatus.STAFF_NOT_FOUND));
 
-        StaffProfileDTO dto = new StaffProfileDTO();
+        ProfileDTO.StaffProfileDTO dto = new ProfileDTO.StaffProfileDTO();
         dto.setStaffId(staff.getId());
         dto.setName(staff.getName());
         dto.setPhone(staff.getPhone());
-        dto.setWelfareCenterId(staff.getWelfareCenterId().intValue());
+        dto.setWelfareCenterName(staff.getWelfareCenter().getOrganName());
 
         return dto;
     }
