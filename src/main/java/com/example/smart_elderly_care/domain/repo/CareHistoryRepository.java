@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface CareHistoryRepository extends JpaRepository<CareHistory, Long> {
+    List<CareHistory> findByUserId(Long userId);
     List<CareHistory> findByUserIdIn(List<Long> userIds);
 }

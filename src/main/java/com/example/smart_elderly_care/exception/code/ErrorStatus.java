@@ -32,7 +32,12 @@ public enum ErrorStatus implements BaseErrorCode {
     PHONE_ALREADY_EXISTS(HttpStatus.NOT_FOUND, "USER_005", "이미 등록된 전화번호입니다."),
     USER_DELETE_FAILED(HttpStatus.NOT_FOUND, "USER_006", "회원 탈퇴에 실패했습니다."),
     ELDERLY_CODE_NOT_EXISTS(HttpStatus.NOT_FOUND, "USER_007", "일치하는 고유 코드가 없습니다."),
-    ;
+
+    // 돌봄 서비스 관련
+    CARE_HISTORY_NOT_FOUND(HttpStatus.NOT_FOUND, "CARE_001", "존재하지 않은 돌봄 이력입니다."),
+
+    // 복지센터 관련
+    WELFARE_CENTER_NOT_FOUND(HttpStatus.NOT_FOUND, "CENTER_001", "존재하지 않은 복지센터입니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
