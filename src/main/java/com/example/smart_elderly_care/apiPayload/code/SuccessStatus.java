@@ -20,6 +20,7 @@ public enum SuccessStatus implements BaseCode {
     USER_LOGOUT_OK(HttpStatus.OK, "AUTH2005", "회원 로그아웃이 완료되었습니다."),
     USER_DELETE_OK(HttpStatus.OK, "AUTH2006", "회원 탈퇴가 완료되었습니다."),
     USER_REFRESH_OK(HttpStatus.OK, "AUTH2007", "토큰 재발급이 완료되었습니다."),
+    WELFARE_CENTERS_OK(HttpStatus.OK, "CENTER2001", "복지센터 목록 조회 성공"),
 
     // 마이페이지 기능 관련
     USER_PROFILE_OK(HttpStatus.OK, "PROFILE2001", "일반 회원 프로필 조회 성공"),
@@ -28,8 +29,12 @@ public enum SuccessStatus implements BaseCode {
 
     // 대상자 관리
     CARE_TARGETS_OK(HttpStatus.OK, "CARE2001", "돌봄 대상자 조회 성공"),
-    CARE_HISTORY_ADD_OK(HttpStatus.OK, "CARE2002", "대상자 돌봄 이력 추가 성공"),
-    CARE_HISTORY_OK(HttpStatus.OK, "CARE2003", "대상자 돌봄 이력 조회 성공"),
+    CARE_TARGET_NAMES_OK(HttpStatus.OK, "CARE2002", "돌봄 대상자 이름 조회 성공"),
+    CARE_PROFILE_OK(HttpStatus.OK, "CARE2003", "돌봄 대상자 프로필 카드 조회 성공"),
+    CARE_HISTORY_ADD_OK(HttpStatus.OK, "CARE2004", "대상자 돌봄 이력 추가 성공"),
+    CARE_HISTORY_OK(HttpStatus.OK, "CARE2005", "돌봄 이력 조회 성공"),
+    CARE_HISTORY_UPDATE_OK(HttpStatus.OK, "CARE2006", "돌봄 이력 수정 성공"),
+    CARE_HISTORY_DELETE_OK(HttpStatus.OK, "CARE2007", "돌봄 이력 삭제 성공"),
     ;
 
     private final HttpStatus httpStatus;
