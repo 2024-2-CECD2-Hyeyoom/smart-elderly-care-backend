@@ -22,8 +22,9 @@ public class User extends Member {
     @Column
     private LocalDate birthDate;
 
-    @Column
-    private Long welfareCenterId;
+    @ManyToOne
+    @JoinColumn(name = "welfare_center_id")
+    private WelfareCenter welfareCenter;
 
     @ElementCollection
     @CollectionTable(name = "member_underlying_diseases", joinColumns = @JoinColumn(name = "member_id"))

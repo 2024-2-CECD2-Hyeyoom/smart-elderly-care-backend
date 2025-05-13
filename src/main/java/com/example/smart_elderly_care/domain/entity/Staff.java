@@ -14,10 +14,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Staff extends Member {
-    @Column
-    private Long welfareCenterId;
-
-    @OneToMany
-    @JoinColumn(name = "welfareCenterId", referencedColumnName = "welfareCenterId")
-    private List<User> managedUsers;
+    @ManyToOne
+    @JoinColumn(name = "welfare_center_id")
+    private WelfareCenter welfareCenter;
 }
