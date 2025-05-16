@@ -4,8 +4,10 @@ import com.example.smart_elderly_care.domain.entity.analysis_data.HumidityData;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface HumidityDataRepository extends JpaRepository<HumidityData, Long> {
     List<HumidityData> findByMemberIdAndDateBetween(Long memberId, LocalDate from, LocalDate to);
+    List<HumidityData> findByMemberIdAndRecordedTimeBetween(Long memberId, LocalDateTime start, LocalDateTime end);
 }

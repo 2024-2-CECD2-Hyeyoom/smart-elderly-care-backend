@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
 
 @Service
 @RequiredArgsConstructor
-public class AnalysisService {
+public class WeeklyAnalysisService {
 
     private final SleepEventRepository sleepEventRepository;
     private final OutingEventRepository outingEventRepository;

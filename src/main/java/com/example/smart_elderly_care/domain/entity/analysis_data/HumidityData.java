@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
+
 @Entity
 @DiscriminatorValue("HUMIDITY")
 @Getter
@@ -17,4 +19,5 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class HumidityData extends EventData{
     private Double humidity;
+    private LocalDateTime recordedTime;
 }

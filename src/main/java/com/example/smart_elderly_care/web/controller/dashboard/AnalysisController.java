@@ -2,7 +2,7 @@ package com.example.smart_elderly_care.web.controller.dashboard;
 
 import com.example.smart_elderly_care.apiPayload.ApiResponse;
 import com.example.smart_elderly_care.apiPayload.code.SuccessStatus;
-import com.example.smart_elderly_care.service.AnalysisService;
+import com.example.smart_elderly_care.service.WeeklyAnalysisService;
 import com.example.smart_elderly_care.web.dto.dashboard.WeeklyDataDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/analysis/{userID}")
 @RequiredArgsConstructor
 public class AnalysisController {
-    private final AnalysisService analysisService;
+    private final WeeklyAnalysisService weeklyAnalysisService;
 
     @Operation(summary = "주간 데이터 조회 API", description = "주간 데이터 조회 결과입니다.")
     @GetMapping("/weekly")
@@ -21,7 +21,7 @@ public class AnalysisController {
             @RequestParam String from,
             @RequestParam String to
     ) {
-        WeeklyDataDTO dto = analysisService.getWeeklyDataDTO(userId, from, to);
+        WeeklyDataDTO dto = weeklyAnalysisService.getWeeklyDataDTO(userId, from, to);
         return ApiResponse.of(SuccessStatus.WEEKLY_REPORT_OK, dto);
     }
 
@@ -32,7 +32,7 @@ public class AnalysisController {
             @RequestParam String from,
             @RequestParam String to
     ) {
-        WeeklyDataDTO dto = analysisService.getWeeklySleepDataDTO(userId, from, to);
+        WeeklyDataDTO dto = weeklyAnalysisService.getWeeklySleepDataDTO(userId, from, to);
         return ApiResponse.of(SuccessStatus.SLEEP_ANALYSIS_REPORT_OK, dto);
     }
 
@@ -43,7 +43,7 @@ public class AnalysisController {
             @RequestParam String from,
             @RequestParam String to
     ) {
-        WeeklyDataDTO dto = analysisService.getWeeklyOutingDataDTO(userId, from, to);
+        WeeklyDataDTO dto = weeklyAnalysisService.getWeeklyOutingDataDTO(userId, from, to);
         return ApiResponse.of(SuccessStatus.OUTING_ANALYSIS_REPORT_OK, dto);
     }
 
@@ -54,7 +54,7 @@ public class AnalysisController {
             @RequestParam String from,
             @RequestParam String to
     ) {
-        WeeklyDataDTO dto = analysisService.getWeeklyTemperatureDataDTO(userId, from, to);
+        WeeklyDataDTO dto = weeklyAnalysisService.getWeeklyTemperatureDataDTO(userId, from, to);
         return ApiResponse.of(SuccessStatus.TEMPERATURE_ANALYSIS_REPORT_OK, dto);
     }
 
@@ -65,7 +65,7 @@ public class AnalysisController {
             @RequestParam String from,
             @RequestParam String to
     ) {
-        WeeklyDataDTO dto = analysisService.getWeeklyHumidityDataDTO(userId, from, to);
+        WeeklyDataDTO dto = weeklyAnalysisService.getWeeklyHumidityDataDTO(userId, from, to);
         return ApiResponse.of(SuccessStatus.HUMIDITY_ANALYSIS_REPORT_OK, dto);
     }
 }

@@ -4,8 +4,10 @@ import com.example.smart_elderly_care.domain.entity.analysis_data.TemperatureDat
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface TemperatureDataRepository extends JpaRepository<TemperatureData, Long> {
     List<TemperatureData> findByMemberIdAndDateBetween(Long memberId, LocalDate from, LocalDate to);
+    List<TemperatureData> findByMemberIdAndRecordedTimeBetween(Long memberId, LocalDateTime start, LocalDateTime end);
 }

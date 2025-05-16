@@ -20,15 +20,15 @@ import java.time.LocalDateTime;
 public class SleepEvent extends EventData {
 
     private LocalDateTime sleepStartTime;
-    private LocalDateTime wakeUpTime;
+    private LocalDateTime sleepEndTime;
 
     private Long sleepDurationMinutes;
 
     @PrePersist
     @PreUpdate
     private void calculateSleepDuration() {
-        if (sleepStartTime != null && wakeUpTime != null) {
-            this.sleepDurationMinutes = Duration.between(sleepStartTime, wakeUpTime).toMinutes();
+        if (sleepStartTime != null && sleepEndTime != null) {
+            this.sleepDurationMinutes = Duration.between(sleepStartTime, sleepEndTime).toMinutes();
         }
     }
 }
