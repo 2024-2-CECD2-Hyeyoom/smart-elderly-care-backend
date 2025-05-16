@@ -27,6 +27,17 @@ public enum SuccessStatus implements BaseCode {
     CAREGIVER_PROFILE_OK(HttpStatus.OK, "PROFILE2002", "보호자 회원 프로필 조회 성공"),
     STAFF_PROFILE_OK(HttpStatus.OK, "PROFILE2003", "담당자 회원 프로필 조회 성공"),
 
+    // 모니터링 대시보드 기능 관련
+    WEEKLY_REPORT_OK(HttpStatus.OK, "REPORT2001", "주간 분석 레포트 조회 성공"),
+    SLEEP_ANALYSIS_REPORT_OK(HttpStatus.OK, "REPORT2002", "수면 분석 레포트 조회 성공"),
+    OUTING_ANALYSIS_REPORT_OK(HttpStatus.OK, "REPORT2003", "외출 분석 레포트 조회 성공"),
+    TEMPERATURE_ANALYSIS_REPORT_OK(HttpStatus.OK, "REPORT2004", "온도 분석 레포트 조회 성공"),
+    HUMIDITY_ANALYSIS_REPORT_OK(HttpStatus.OK, "REPORT2005", "습도 분석 레포트 조회 성공"),
+    SLEEP_TIME_ANALYSIS_REPORT_OK(HttpStatus.OK, "REPORT2006", "수면 시간별 분석 레포트 조회 성공"),
+    OUTING_TIME_ANALYSIS_REPORT_OK(HttpStatus.OK, "REPORT2007", "외출 시간별 분석 레포트 조회 성공"),
+    TEMPERATURE_TIME_ANALYSIS_REPORT_OK(HttpStatus.OK, "REPORT2008", "온도 시간별 분석 레포트 조회 성공"),
+    HUMIDITY_TIME_ANALYSIS_REPORT_OK(HttpStatus.OK, "REPORT2009", "습도 시간별 분석 레포트 조회 성공"),
+
     // 대상자 관리
     CARE_TARGETS_OK(HttpStatus.OK, "CARE2001", "돌봄 대상자 조회 성공"),
     CARE_TARGET_NAMES_OK(HttpStatus.OK, "CARE2002", "돌봄 대상자 이름 조회 성공"),
