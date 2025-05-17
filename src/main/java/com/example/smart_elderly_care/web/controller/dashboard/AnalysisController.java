@@ -2,7 +2,10 @@ package com.example.smart_elderly_care.web.controller.dashboard;
 
 import com.example.smart_elderly_care.apiPayload.ApiResponse;
 import com.example.smart_elderly_care.apiPayload.code.SuccessStatus;
+import com.example.smart_elderly_care.service.DailyAnalysisService;
 import com.example.smart_elderly_care.service.WeeklyAnalysisService;
+import com.example.smart_elderly_care.web.dto.dashboard.DailyEventDTO;
+import com.example.smart_elderly_care.web.dto.dashboard.DailyHourlyDataDTO;
 import com.example.smart_elderly_care.web.dto.dashboard.WeeklyDataDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/analysis/{userID}")
 @RequiredArgsConstructor
 public class AnalysisController {
+
     private final WeeklyAnalysisService weeklyAnalysisService;
+    private final DailyAnalysisService dailyAnalysisService;
 
     @Operation(summary = "주간 데이터 조회 API", description = "주간 데이터 조회 결과입니다.")
     @GetMapping("/weekly")
@@ -36,6 +41,16 @@ public class AnalysisController {
         return ApiResponse.of(SuccessStatus.SLEEP_ANALYSIS_REPORT_OK, dto);
     }
 
+    @Operation(summary = "수면 시간별 데이터 조회 API", description = "수면 시간별 데이터 조회 결과입니다.")
+    @GetMapping("/sleep/detail")
+    public ApiResponse<DailyEventDTO> getDailySleepAnalysis(
+            @PathVariable Long userId,
+            @RequestParam String date
+    ) {
+        DailyEventDTO dto = dailyAnalysisService.getDailySleepDataDTO(userId, date);
+        return ApiResponse.of(SuccessStatus.SLEEP_TIME_ANALYSIS_REPORT_OK, dto);
+    }
+
     @Operation(summary = "외출 데이터 조회 API", description = "외출 데이터 조회 결과입니다.")
     @GetMapping("/outing")
     public ApiResponse<WeeklyDataDTO> getOutingAnalysis(
@@ -45,6 +60,16 @@ public class AnalysisController {
     ) {
         WeeklyDataDTO dto = weeklyAnalysisService.getWeeklyOutingDataDTO(userId, from, to);
         return ApiResponse.of(SuccessStatus.OUTING_ANALYSIS_REPORT_OK, dto);
+    }
+
+    @Operation(summary = "외출 시간별 데이터 조회 API", description = "외출 시간별 데이터 조회 결과입니다.")
+    @GetMapping("/outing/detail")
+    public ApiResponse<DailyEventDTO> getDailyOutingAnalysis(
+            @PathVariable Long userId,
+            @RequestParam String date
+    ) {
+        DailyEventDTO dto = dailyAnalysisService.getDailyOutingDataDTO(userId, date);
+        return ApiResponse.of(SuccessStatus.OUTING_TIME_ANALYSIS_REPORT_OK, dto);
     }
 
     @Operation(summary = "온도 데이터 조회 API", description = "온도 데이터 조회 결과입니다.")
@@ -58,6 +83,16 @@ public class AnalysisController {
         return ApiResponse.of(SuccessStatus.TEMPERATURE_ANALYSIS_REPORT_OK, dto);
     }
 
+    @Operation(summary = "온도 시간별 데이터 조회 API", description = "온도 시간별 데이터 조회 결과입니다.")
+    @GetMapping("/temperature/detail")
+    public ApiResponse<DailyHourlyDataDTO> getDailyTemperatureAnalysis(
+            @PathVariable Long userId,
+            @RequestParam String date
+    ) {
+        DailyHourlyDataDTO dto = dailyAnalysisService.getDailyTemperatureDataDTO(userId, date);
+        return ApiResponse.of(SuccessStatus.TEMPERATURE_TIME_ANALYSIS_REPORT_OK, dto);
+    }
+
     @Operation(summary = "습도 데이터 조회 API", description = "습도 데이터 조회 결과입니다.")
     @GetMapping("/humidity")
     public ApiResponse<WeeklyDataDTO> getHumidityAnalysis(
@@ -67,5 +102,15 @@ public class AnalysisController {
     ) {
         WeeklyDataDTO dto = weeklyAnalysisService.getWeeklyHumidityDataDTO(userId, from, to);
         return ApiResponse.of(SuccessStatus.HUMIDITY_ANALYSIS_REPORT_OK, dto);
+    }
+
+    @Operation(summary = "습도 시간별 데이터 조회 API", description = "습도 시간별 데이터 조회 결과입니다.")
+    @GetMapping("/humidity/detail")
+    public ApiResponse<DailyHourlyDataDTO> getDailyHumidityAnalysis(
+            @PathVariable Long userId,
+            @RequestParam String date
+    ) {
+        DailyHourlyDataDTO dto = dailyAnalysisService.getDailyHumidityDataDTO(userId, date);
+        return ApiResponse.of(SuccessStatus.HUMIDITY_TIME_ANALYSIS_REPORT_OK, dto);
     }
 }
