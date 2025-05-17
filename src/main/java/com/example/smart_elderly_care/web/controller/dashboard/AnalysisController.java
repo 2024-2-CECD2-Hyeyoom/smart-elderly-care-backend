@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/analysis/{userID}")
+@RequestMapping("/analysis/{userId}")
 @RequiredArgsConstructor
 public class AnalysisController {
 
@@ -23,7 +23,7 @@ public class AnalysisController {
     @GetMapping("/weekly")
     public ApiResponse<WeeklyDataDTO> getWeeklyAnalysis(
             @PathVariable Long userId,
-            @RequestParam String from,
+            @RequestParam(required = false) String from,
             @RequestParam String to
     ) {
         WeeklyDataDTO dto = weeklyAnalysisService.getWeeklyDataDTO(userId, from, to);
@@ -34,7 +34,7 @@ public class AnalysisController {
     @GetMapping("/sleep")
     public ApiResponse<WeeklyDataDTO> getSleepAnalysis(
             @PathVariable Long userId,
-            @RequestParam String from,
+            @RequestParam(required = false) String from,
             @RequestParam String to
     ) {
         WeeklyDataDTO dto = weeklyAnalysisService.getWeeklySleepDataDTO(userId, from, to);
@@ -55,7 +55,7 @@ public class AnalysisController {
     @GetMapping("/outing")
     public ApiResponse<WeeklyDataDTO> getOutingAnalysis(
             @PathVariable Long userId,
-            @RequestParam String from,
+            @RequestParam (required = false)String from,
             @RequestParam String to
     ) {
         WeeklyDataDTO dto = weeklyAnalysisService.getWeeklyOutingDataDTO(userId, from, to);
@@ -76,7 +76,7 @@ public class AnalysisController {
     @GetMapping("/temperature")
     public ApiResponse<WeeklyDataDTO> getTemperatureAnalysis(
             @PathVariable Long userId,
-            @RequestParam String from,
+            @RequestParam (required = false)String from,
             @RequestParam String to
     ) {
         WeeklyDataDTO dto = weeklyAnalysisService.getWeeklyTemperatureDataDTO(userId, from, to);
@@ -97,7 +97,7 @@ public class AnalysisController {
     @GetMapping("/humidity")
     public ApiResponse<WeeklyDataDTO> getHumidityAnalysis(
             @PathVariable Long userId,
-            @RequestParam String from,
+            @RequestParam (required = false)String from,
             @RequestParam String to
     ) {
         WeeklyDataDTO dto = weeklyAnalysisService.getWeeklyHumidityDataDTO(userId, from, to);

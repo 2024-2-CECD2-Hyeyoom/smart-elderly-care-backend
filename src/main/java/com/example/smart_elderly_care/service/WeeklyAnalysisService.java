@@ -25,14 +25,12 @@ public class WeeklyAnalysisService {
 
     public WeeklyDataDTO getWeeklyDataDTO(Long userId, String from, String to) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate toDate;
+        LocalDate toDate = LocalDate.parse(to, formatter);
         LocalDate fromDate;
 
-        if (from == null || to == null) {
-            toDate = LocalDate.now();
+        if (from == null) {
             fromDate = toDate.minusDays(6);
         } else {
-            toDate = LocalDate.parse(to, formatter);
             fromDate = LocalDate.parse(from, formatter);
         }
 
@@ -68,14 +66,12 @@ public class WeeklyAnalysisService {
 
     public WeeklyDataDTO getWeeklySleepDataDTO(Long userId, String from, String to) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate toDate;
+        LocalDate toDate = LocalDate.parse(to, formatter);
         LocalDate fromDate;
 
-        if (from == null || to == null) {
-            toDate = LocalDate.now();
+        if (from == null) {
             fromDate = toDate.minusDays(6);
         } else {
-            toDate = LocalDate.parse(to, formatter);
             fromDate = LocalDate.parse(from, formatter);
         }
 
@@ -122,14 +118,12 @@ public class WeeklyAnalysisService {
 
     public WeeklyDataDTO getWeeklyOutingDataDTO(Long userId, String from, String to) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate toDate;
+        LocalDate toDate = LocalDate.parse(to, formatter);
         LocalDate fromDate;
 
-        if (from == null || to == null) {
-            toDate = LocalDate.now();
+        if (from == null) {
             fromDate = toDate.minusDays(6);
         } else {
-            toDate = LocalDate.parse(to, formatter);
             fromDate = LocalDate.parse(from, formatter);
         }
 
@@ -176,14 +170,12 @@ public class WeeklyAnalysisService {
 
     public WeeklyDataDTO getWeeklyTemperatureDataDTO(Long userId, String from, String to) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate toDate;
+        LocalDate toDate = LocalDate.parse(to, formatter);
         LocalDate fromDate;
 
-        if (from == null || to == null) {
-            toDate = LocalDate.now();
+        if (from == null) {
             fromDate = toDate.minusDays(6);
         } else {
-            toDate = LocalDate.parse(to, formatter);
             fromDate = LocalDate.parse(from, formatter);
         }
 
@@ -232,14 +224,12 @@ public class WeeklyAnalysisService {
 
     public WeeklyDataDTO getWeeklyHumidityDataDTO(Long userId, String from, String to) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate toDate;
+        LocalDate toDate = LocalDate.parse(to, formatter);
         LocalDate fromDate;
 
-        if (from == null || to == null) {
-            toDate = LocalDate.now();
+        if (from == null) {
             fromDate = toDate.minusDays(6);
         } else {
-            toDate = LocalDate.parse(to, formatter);
             fromDate = LocalDate.parse(from, formatter);
         }
 
@@ -288,14 +278,12 @@ public class WeeklyAnalysisService {
 
     public WeeklyDataDTO getWeeklyActivityDataDTO(Long userId, String from, String to) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate toDate;
+        LocalDate toDate = LocalDate.parse(to, formatter);
         LocalDate fromDate;
 
-        if (from == null || to == null) {
-            toDate = LocalDate.now();
+        if (from == null) {
             fromDate = toDate.minusDays(6);
         } else {
-            toDate = LocalDate.parse(to, formatter);
             fromDate = LocalDate.parse(from, formatter);
         }
 
