@@ -2,9 +2,9 @@ package com.example.smart_elderly_care.service;
 
 import com.example.smart_elderly_care.exception.CareClientException;
 import com.example.smart_elderly_care.exception.code.ErrorStatus;
-import com.example.smart_elderly_care.domain.entity.Caregiver;
-import com.example.smart_elderly_care.domain.entity.Staff;
-import com.example.smart_elderly_care.domain.entity.User;
+import com.example.smart_elderly_care.domain.entity.member.Caregiver;
+import com.example.smart_elderly_care.domain.entity.member.Staff;
+import com.example.smart_elderly_care.domain.entity.member.User;
 import com.example.smart_elderly_care.domain.repo.CaregiverRepository;
 import com.example.smart_elderly_care.domain.repo.StaffRepository;
 import com.example.smart_elderly_care.domain.repo.UserRepository;

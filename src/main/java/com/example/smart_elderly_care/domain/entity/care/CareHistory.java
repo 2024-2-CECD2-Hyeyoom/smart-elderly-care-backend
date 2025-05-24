@@ -1,4 +1,4 @@
-package com.example.smart_elderly_care.domain.entity;
+package com.example.smart_elderly_care.domain.entity.care;
 
 import jakarta.persistence.*;
 import lombok.*;

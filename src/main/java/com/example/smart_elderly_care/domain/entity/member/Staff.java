@@ -1,10 +1,8 @@
-package com.example.smart_elderly_care.domain.entity;
+package com.example.smart_elderly_care.domain.entity.member;
 
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-
-import java.util.List;
 
 @Entity
 @DiscriminatorValue("STAFF")

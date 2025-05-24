@@ -1,7 +1,6 @@
 package com.example.smart_elderly_care.domain.repo;
 
-import com.example.smart_elderly_care.domain.entity.WelfareCenter;
-import org.hibernate.dialect.lock.OptimisticEntityLockException;
+import com.example.smart_elderly_care.domain.entity.member.WelfareCenter;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
