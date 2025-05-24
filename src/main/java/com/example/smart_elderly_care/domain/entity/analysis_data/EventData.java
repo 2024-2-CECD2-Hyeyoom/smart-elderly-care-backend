@@ -1,6 +1,6 @@
 package com.example.smart_elderly_care.domain.entity.analysis_data;
 
-import com.example.smart_elderly_care.domain.entity.Member;
+import com.example.smart_elderly_care.domain.entity.member.Member;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

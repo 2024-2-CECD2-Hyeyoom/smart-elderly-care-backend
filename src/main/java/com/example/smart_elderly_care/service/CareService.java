@@ -1,6 +1,10 @@
 package com.example.smart_elderly_care.service;
 
-import com.example.smart_elderly_care.domain.entity.*;
+import com.example.smart_elderly_care.domain.entity.care.CareHistory;
+import com.example.smart_elderly_care.domain.entity.member.Caregiver;
+import com.example.smart_elderly_care.domain.entity.member.Member;
+import com.example.smart_elderly_care.domain.entity.member.Staff;
+import com.example.smart_elderly_care.domain.entity.member.User;
 import com.example.smart_elderly_care.domain.repo.*;
 import com.example.smart_elderly_care.exception.CareClientException;
 import com.example.smart_elderly_care.exception.code.ErrorStatus;

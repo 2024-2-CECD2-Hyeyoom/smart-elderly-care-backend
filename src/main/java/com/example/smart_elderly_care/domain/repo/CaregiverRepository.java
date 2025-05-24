@@ -1,6 +1,6 @@
 package com.example.smart_elderly_care.domain.repo;
 
-import com.example.smart_elderly_care.domain.entity.Caregiver;
+import com.example.smart_elderly_care.domain.entity.member.Caregiver;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

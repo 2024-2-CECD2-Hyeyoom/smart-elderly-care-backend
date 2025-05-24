@@ -1,6 +1,6 @@
 package com.example.smart_elderly_care.service;
 
-import com.example.smart_elderly_care.domain.entity.WelfareCenter;
+import com.example.smart_elderly_care.domain.entity.member.WelfareCenter;
 import com.example.smart_elderly_care.domain.repo.WelfareCenterRepository;
 import com.example.smart_elderly_care.web.dto.member.WelfareCenterDTO;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
-import org.springframework.web.util.UriUtils;
 
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
