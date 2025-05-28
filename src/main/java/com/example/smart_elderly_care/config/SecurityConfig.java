@@ -43,7 +43,8 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/",
                                 "/member/login",
-                                "/member/signup/**"
+                                "/member/signup/**",
+                                "/member/welfare-centers/**"
                         ).permitAll()
 
                         .anyRequest().authenticated()           // 그 외는 인증 필요

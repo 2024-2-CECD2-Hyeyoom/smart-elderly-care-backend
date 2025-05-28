@@ -19,20 +19,20 @@ public class CareController {
     private final CareService careService;
 
     @Operation(summary = "돌봄 대상자 조회 API", description = "보호자/담당자의 돌봄 대상자를 조회합니다.")
-    @GetMapping("/{userId}/targets")
-    public ApiResponse<List<CareTargetDTO>> getCareTargets(@PathVariable Long userId) {
-        List<CareTargetDTO> careTargets = careService.getCareTargetsByManager(userId);
+    @GetMapping("/{memberId}/targets")
+    public ApiResponse<List<CareTargetDTO>> getCareTargets(@PathVariable Long memberId) {
+        List<CareTargetDTO> careTargets = careService.getCareTargetsByManager(memberId);
         return ApiResponse.of(SuccessStatus.CARE_TARGETS_OK, careTargets);
     }
 
     @Operation(summary = "돌봄 대상자 이름 목록 조회 API", description = "돌봄 이력 추가 시, 보호자/담당자의 관리 중인 대상자의 id 및 이름을 불러옵니다.")
-    @GetMapping("/{userId}/targets/names")
-    public ApiResponse<List<CareTargetDTO.Name>> getCareTargetNames(@PathVariable Long userId) {
-        List<CareTargetDTO.Name> careTargetNames = careService.getCareTargetNamesByManager(userId);
+    @GetMapping("/{memberId}/targets/names")
+    public ApiResponse<List<CareTargetDTO.Name>> getCareTargetNames(@PathVariable Long memberId) {
+        List<CareTargetDTO.Name> careTargetNames = careService.getCareTargetNamesByManager(memberId);
         return ApiResponse.of(SuccessStatus.CARE_TARGET_NAMES_OK, careTargetNames);
     }
 
-    @Operation(summary = "돌봄 대상자 프로필 카드 조회 API", description = "노인의 기본 프로필 정보를 조회합니다.")
+    @Operation(summary = "돌봄 대상자 프로필 카드 조회 API", description = "대상자의 기본 프로필 정보를 조회합니다.")
     @GetMapping("/{userId}/profile")
     public ApiResponse<CareTargetDTO.Profile> getCareTargetProfile(@PathVariable Long userId) {
         CareTargetDTO.Profile profile = careService.getCareTargetProfile(userId);
@@ -47,13 +47,13 @@ public class CareController {
     }
 
     @Operation(summary = "돌봄 대상자 돌봄 이력 조회 API", description = "보호자/담당자의 돌봄 대상자의 돌봄 이력을 조회합니다.")
-    @GetMapping("/{userId}/targets/history")
-    public ApiResponse<List<CareHistoryDTO.Response>> getCareHistoriesByManager(@PathVariable Long userId) {
-        List<CareHistoryDTO.Response> histories = careService.getCareHistoriesByManager(userId);
+    @GetMapping("/{memberId}/targets/history")
+    public ApiResponse<List<CareHistoryDTO.Response>> getCareHistoriesByManager(@PathVariable Long memberId) {
+        List<CareHistoryDTO.Response> histories = careService.getCareHistoriesByManager(memberId);
         return ApiResponse.of(SuccessStatus.CARE_HISTORY_OK, histories);
     }
 
-    @Operation(summary = "본인 돌봄 이력 조회 API", description = "노인이 자신의 돌봄 이력을 조회합니다.")
+    @Operation(summary = "본인 돌봄 이력 조회 API", description = "대상자가 자신의 돌봄 이력을 조회합니다.")
     @GetMapping("/{userId}/history")
     public ApiResponse<List<CareHistoryDTO.MyHistory>> getMyCareHistories(@PathVariable Long userId) {
         List<CareHistoryDTO.MyHistory> histories = careService.getCareHistoriesForUser(userId);
