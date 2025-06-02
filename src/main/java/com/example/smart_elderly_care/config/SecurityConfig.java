@@ -54,13 +54,12 @@ public class SecurityConfig {
                                 "/swagger-ui.html"
                         ).permitAll()
 
-                        // 로그인 및 회원가입 경로 허용
+                        // 로그인 및 회원가입, 센서 데이터 전송 경로 허용
                         .requestMatchers(
                                 "/",
                                 "/member/login",
                                 "/member/signup/**",
-                                "/member/welfare_centers",
-                                "/member/welfare_centers/**"
+                                "/api/sensor/**"
                         ).permitAll()
 
                         .anyRequest().authenticated()           // 그 외는 인증 필요

@@ -88,9 +88,9 @@ public class DailyAnalysisService {
         return dto;
     }
 
-    public DailyHourlyDataDTO getDailyHumidityDataDTO(Long userId, String dateStr) {
-        LocalDate date = LocalDate.parse(dateStr);
-        LocalDateTime start = date.atStartOfDay();
+    public DailyHourlyDataDTO getDailyHumidityDataDTO(Long userId, String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        LocalDateTime start = localDate.atStartOfDay();
         LocalDateTime end = start.plusDays(1);
 
         List<HumidityData> dataList = humidityDataRepository
@@ -113,16 +113,16 @@ public class DailyAnalysisService {
                 .collect(Collectors.toList());
 
         DailyHourlyDataDTO dto = new DailyHourlyDataDTO();
-        dto.setDate(dateStr);
+        dto.setDate(date);
         dto.setLabels(labels);
         dto.setData(data);
 
         return dto;
     }
 
-    public DailyHourlyDataDTO getDailyTemperatureDataDTO(Long userId, String dateStr) {
-        LocalDate date = LocalDate.parse(dateStr);
-        LocalDateTime start = date.atStartOfDay();
+    public DailyHourlyDataDTO getDailyTemperatureDataDTO(Long userId, String date) {
+        LocalDate localDate = LocalDate.parse(date);
+        LocalDateTime start = localDate.atStartOfDay();
         LocalDateTime end = start.plusDays(1);
 
         List<TemperatureData> dataList = temperatureDataRepository
@@ -145,7 +145,7 @@ public class DailyAnalysisService {
                 .collect(Collectors.toList());
 
         DailyHourlyDataDTO dto = new DailyHourlyDataDTO();
-        dto.setDate(dateStr);
+        dto.setDate(date);
         dto.setLabels(labels);
         dto.setData(data);
 
