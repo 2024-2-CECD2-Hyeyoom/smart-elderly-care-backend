@@ -1,5 +1,6 @@
 package com.example.smart_elderly_care.jwt;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,12 +23,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // Request Header에서 JWT 토큰 추출
         String token = resolveToken(request);
 
-        // 토큰 유효성 검사 후 인증 처리
-        if (token != null && jwtTokenProvider.validateToken(token)) {
-            // 토큰이 유효할 경우 인증 객체 생성
-            Authentication authentication = jwtTokenProvider.getAuthentication(token);
-            // SecurityContext에 인증 객체 설정
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        try {
+            if (token != null && jwtTokenProvider.validateToken(token)) {
+                Authentication auth = jwtTokenProvider.getAuthentication(token);
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            }
+        } catch (ExpiredJwtException e) {
+            System.out.println("JWT 만료: " + e.getMessage());
         }
 
         // 다음 필터로 이동

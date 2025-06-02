@@ -74,21 +74,21 @@ public class MemberController {
 
     // ---------------------- 복지센터 ----------------------
     @Operation(summary = "복지센터 전체 조회 API", description = "DB에 저장된 모든 복지센터를 조회합니다.")
-    @GetMapping("/welfare-centers")
+    @GetMapping("/welfare_centers")
     public ApiResponse<List<WelfareCenterDTO>> getCenters() {
         List<WelfareCenterDTO> welfareCenters = welfareCenterApiService.getWelfareCenters();
         return ApiResponse.of(SuccessStatus.WELFARE_CENTERS_OK, welfareCenters);
     }
 
     @Operation(summary = "시도 기준 복지센터 필터 API", description = "시도명(sido)으로 복지센터를 조회합니다.")
-    @GetMapping("/welfare-centers/sido")
+    @GetMapping("/welfare_centers/sido")
     public ApiResponse<List<WelfareCenterDTO>> getBySido(@RequestParam String sido) {
         List<WelfareCenterDTO> centers = welfareCenterApiService.getWelfareCentersBySido(sido);
         return ApiResponse.of(SuccessStatus.WELFARE_CENTERS_OK, centers);
     }
 
     @Operation(summary = "시도 + 시군구 기준 복지센터 필터 API", description = "시도명과 시군구명으로 복지센터를 조회합니다.")
-    @GetMapping("/welfare-centers/sido-sigungu")
+    @GetMapping("/welfare_centers/sido-sigungu")
     public ApiResponse<List<WelfareCenterDTO>> getBySidoAndSigungu(@RequestParam String sido, @RequestParam String sigungu) {
         List<WelfareCenterDTO> centers = welfareCenterApiService.getWelfareCentersBySidoAndSigungu(sido, sigungu);
         return ApiResponse.of(SuccessStatus.WELFARE_CENTERS_OK, centers);

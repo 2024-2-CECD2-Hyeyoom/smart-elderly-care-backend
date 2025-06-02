@@ -33,6 +33,21 @@ public class SecurityConfig {
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
+                        .anyRequest().permitAll()  // ✅ 모든 요청 인증 없이 허용
+                )
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class); // 이 줄 있어도 상관 없음
+
+        return http.build();
+    }
+
+    /**
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
@@ -44,7 +59,8 @@ public class SecurityConfig {
                                 "/",
                                 "/member/login",
                                 "/member/signup/**",
-                                "/member/welfare-centers/**"
+                                "/member/welfare_centers",
+                                "/member/welfare_centers/**"
                         ).permitAll()
 
                         .anyRequest().authenticated()           // 그 외는 인증 필요
@@ -53,6 +69,7 @@ public class SecurityConfig {
         ;
         return http.build();
     }
+     */
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
