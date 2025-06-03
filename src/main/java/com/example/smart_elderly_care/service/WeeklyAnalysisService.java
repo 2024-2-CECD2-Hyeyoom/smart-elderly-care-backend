@@ -3,13 +3,17 @@ package com.example.smart_elderly_care.service;
 import com.example.smart_elderly_care.domain.entity.analysis_data.*;
 import com.example.smart_elderly_care.domain.repo.analysis_data.*;
 import com.example.smart_elderly_care.web.dto.dashboard.WeeklyDataDTO;
+import com.example.smart_elderly_care.web.dto.dashboard.WeeklyOutingDataDTO;
+import com.example.smart_elderly_care.web.dto.dashboard.WeeklySleepDataDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -60,11 +64,14 @@ public class WeeklyAnalysisService {
                 outingDTO.getAveragePreviousWeek(),
                 activityDTO.getAveragePreviousWeek()
         );
+        WeeklyDataDTO dto = new WeeklyDataDTO();
+        setWeeklyDataDTO(dto, fromDate, toDate, previousWeekStart, previousWeekEnd,
+                labels, currentWeekData, previousWeekData, 0, 0);
 
-        return setWeeklyDataDTO(fromDate, toDate, previousWeekStart, previousWeekEnd, labels, currentWeekData, previousWeekData, 0, 0);
+        return dto;
     }
 
-    public WeeklyDataDTO getWeeklySleepDataDTO(Long userId, String from, String to) {
+    public WeeklySleepDataDTO getWeeklySleepDataDTO(Long userId, String from, String to) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate toDate = LocalDate.parse(to, formatter);
         LocalDate fromDate;
@@ -82,8 +89,10 @@ public class WeeklyAnalysisService {
                 .mapToObj(i -> fromDate.plusDays(i).toString())
                 .collect(Collectors.toList());
 
-        Map<LocalDate, Long> currentMap = sleepEventRepository
-                .findByMemberIdAndDateBetween(userId, fromDate, toDate).stream()
+        List<SleepEvent> currentWeekEvents = sleepEventRepository
+                .findByMemberIdAndDateBetween(userId, fromDate, toDate);
+
+        Map<LocalDate, Long> currentMap = currentWeekEvents.stream()
                 .collect(Collectors.groupingBy(
                         SleepEvent::getDate,
                         Collectors.summingLong(SleepEvent::getSleepDurationMinutes)
@@ -113,10 +122,32 @@ public class WeeklyAnalysisService {
         double avgCurrent = currentWeekData.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
         double avgPrevious = previousWeekData.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
 
-        return setWeeklyDataDTO(fromDate, toDate, previousWeekStart, previousWeekEnd, labels, currentWeekData, previousWeekData, avgCurrent, avgPrevious);
+        List<SleepEvent> sleepEventsOnToDate = currentWeekEvents.stream()
+                .filter(e -> e.getSleepStartTime() != null && e.getSleepStartTime().toLocalDate().equals(toDate))
+                .collect(Collectors.toList());
+
+        LocalDateTime sleepStartTime = sleepEventsOnToDate.stream()
+                .map(SleepEvent::getSleepStartTime)
+                .filter(Objects::nonNull)
+                .min(LocalDateTime::compareTo)
+                .orElse(null);
+
+        LocalDateTime sleepEndTime = sleepEventsOnToDate.stream()
+                .map(SleepEvent::getSleepEndTime)
+                .filter(Objects::nonNull)
+                .max(LocalDateTime::compareTo)
+                .orElse(null);
+
+        WeeklySleepDataDTO dto = new WeeklySleepDataDTO();
+        setWeeklyDataDTO(dto, fromDate, toDate, previousWeekStart, previousWeekEnd,
+                labels, currentWeekData, previousWeekData, avgCurrent, avgPrevious);
+
+        dto.setSleepStartTime(sleepStartTime);
+        dto.setSleepEndTime(sleepEndTime);
+        return dto;
     }
 
-    public WeeklyDataDTO getWeeklyOutingDataDTO(Long userId, String from, String to) {
+    public WeeklyOutingDataDTO getWeeklyOutingDataDTO(Long userId, String from, String to) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate toDate = LocalDate.parse(to, formatter);
         LocalDate fromDate;
@@ -165,7 +196,17 @@ public class WeeklyAnalysisService {
         double avgCurrent = currentWeekData.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
         double avgPrevious = previousWeekData.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
 
-        return setWeeklyDataDTO(fromDate, toDate, previousWeekStart, previousWeekEnd, labels, currentWeekData, previousWeekData, avgCurrent, avgPrevious);
+        WeeklyOutingDataDTO dto = new WeeklyOutingDataDTO();
+        setWeeklyDataDTO(dto, fromDate, toDate, previousWeekStart, previousWeekEnd,
+                labels, currentWeekData, previousWeekData, avgCurrent, avgPrevious);
+
+        long totalOutingDurationOnToDate = outingEventRepository
+                .findByMemberIdAndDateBetween(userId, toDate, toDate).stream()
+                .mapToLong(e -> e.getOutingDurationMinutes() != null ? e.getOutingDurationMinutes() : 0L)
+                .sum();
+        dto.setOutingDurationMinutes(totalOutingDurationOnToDate);
+
+        return dto;
     }
 
     public WeeklyDataDTO getWeeklyTemperatureDataDTO(Long userId, String from, String to) {
@@ -219,7 +260,10 @@ public class WeeklyAnalysisService {
         double avgCurrent = currentWeekData.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
         double avgPrevious = previousWeekData.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
 
-        return setWeeklyDataDTO(fromDate, toDate, previousWeekStart, previousWeekEnd, labels, currentWeekData, previousWeekData, avgCurrent, avgPrevious);
+        WeeklyDataDTO dto = new WeeklyDataDTO();
+        setWeeklyDataDTO(dto, fromDate, toDate, previousWeekStart, previousWeekEnd,
+                labels, currentWeekData, previousWeekData, avgCurrent, avgPrevious);
+        return dto;
     }
 
     public WeeklyDataDTO getWeeklyHumidityDataDTO(Long userId, String from, String to) {
@@ -273,7 +317,10 @@ public class WeeklyAnalysisService {
         double avgCurrent = currentWeekData.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
         double avgPrevious = previousWeekData.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
 
-        return setWeeklyDataDTO(fromDate, toDate, previousWeekStart, previousWeekEnd, labels, currentWeekData, previousWeekData, avgCurrent, avgPrevious);
+        WeeklyDataDTO dto = new WeeklyDataDTO();
+        setWeeklyDataDTO(dto, fromDate, toDate, previousWeekStart, previousWeekEnd,
+                labels, currentWeekData, previousWeekData, avgCurrent, avgPrevious);
+        return dto;
     }
 
     public WeeklyDataDTO getWeeklyActivityDataDTO(Long userId, String from, String to) {
@@ -327,17 +374,22 @@ public class WeeklyAnalysisService {
         double avgCurrent = currentWeekData.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
         double avgPrevious = previousWeekData.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
 
-        return setWeeklyDataDTO(fromDate, toDate, previousWeekStart, previousWeekEnd, labels, currentWeekData, previousWeekData, avgCurrent, avgPrevious);
+        WeeklyDataDTO dto = new WeeklyDataDTO();
+        setWeeklyDataDTO(dto, fromDate, toDate, previousWeekStart, previousWeekEnd,
+                labels, currentWeekData, previousWeekData, avgCurrent, avgPrevious);
+        return dto;
     }
 
-    private WeeklyDataDTO setWeeklyDataDTO(LocalDate fromDate, LocalDate toDate, LocalDate previousWeekStart, LocalDate previousWeekEnd,
-                                           List<String> labels, List<Double> currentWeekData, List<Double> previousWeekData,
-                                           double avgCurrent, double avgPrevious) {
-
-        WeeklyDataDTO dto = new WeeklyDataDTO();
+    private <T extends WeeklyDataDTO> void setWeeklyDataDTO(
+            T dto,
+            LocalDate fromDate, LocalDate toDate,
+            LocalDate previousWeekStart, LocalDate previousWeekEnd,
+            List<String> labels,
+            List<Double> currentWeekData, List<Double> previousWeekData,
+            double avgCurrent, double avgPrevious
+    ) {
         WeeklyDataDTO.Period period = new WeeklyDataDTO.Period();
         WeeklyDataDTO.Period.DateRange currentRange = new WeeklyDataDTO.Period.DateRange();
-
         currentRange.setFrom(fromDate.toString());
         currentRange.setTo(toDate.toString());
 
@@ -358,6 +410,5 @@ public class WeeklyAnalysisService {
         dto.setAverageCurrentWeek(avgCurrent);
         dto.setAveragePreviousWeek(avgPrevious);
 
-        return dto;
     }
 }

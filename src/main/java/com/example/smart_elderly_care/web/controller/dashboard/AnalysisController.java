@@ -4,9 +4,7 @@ import com.example.smart_elderly_care.apiPayload.ApiResponse;
 import com.example.smart_elderly_care.apiPayload.code.SuccessStatus;
 import com.example.smart_elderly_care.service.DailyAnalysisService;
 import com.example.smart_elderly_care.service.WeeklyAnalysisService;
-import com.example.smart_elderly_care.web.dto.dashboard.DailyEventDTO;
-import com.example.smart_elderly_care.web.dto.dashboard.DailyHourlyDataDTO;
-import com.example.smart_elderly_care.web.dto.dashboard.WeeklyDataDTO;
+import com.example.smart_elderly_care.web.dto.dashboard.*;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -32,12 +30,12 @@ public class AnalysisController {
 
     @Operation(summary = "수면 데이터 조회 API", description = "수면 데이터 조회 결과입니다.")
     @GetMapping("/sleep")
-    public ApiResponse<WeeklyDataDTO> getSleepAnalysis(
+    public ApiResponse<WeeklySleepDataDTO> getSleepAnalysis(
             @PathVariable Long userId,
             @RequestParam(required = false) String from,
             @RequestParam String to
     ) {
-        WeeklyDataDTO dto = weeklyAnalysisService.getWeeklySleepDataDTO(userId, from, to);
+        WeeklySleepDataDTO dto = weeklyAnalysisService.getWeeklySleepDataDTO(userId, from, to);
         return ApiResponse.of(SuccessStatus.SLEEP_ANALYSIS_REPORT_OK, dto);
     }
 
@@ -53,12 +51,12 @@ public class AnalysisController {
 
     @Operation(summary = "외출 데이터 조회 API", description = "외출 데이터 조회 결과입니다.")
     @GetMapping("/outing")
-    public ApiResponse<WeeklyDataDTO> getOutingAnalysis(
+    public ApiResponse<WeeklyOutingDataDTO> getOutingAnalysis(
             @PathVariable Long userId,
             @RequestParam (required = false)String from,
             @RequestParam String to
     ) {
-        WeeklyDataDTO dto = weeklyAnalysisService.getWeeklyOutingDataDTO(userId, from, to);
+        WeeklyOutingDataDTO dto = weeklyAnalysisService.getWeeklyOutingDataDTO(userId, from, to);
         return ApiResponse.of(SuccessStatus.OUTING_ANALYSIS_REPORT_OK, dto);
     }
 
