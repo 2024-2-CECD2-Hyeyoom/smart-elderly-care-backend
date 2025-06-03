@@ -44,6 +44,7 @@ public class LoginService {
                 .memberId(member.getId())
                 .role(member.getRole().name())
                 .token(tokenInfo.getAccessToken())
+                .name(member.getName())
                 .build();
     }
 }

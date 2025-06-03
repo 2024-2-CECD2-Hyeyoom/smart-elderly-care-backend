@@ -17,5 +17,6 @@ public class LoginDTO {
         private Long memberId;
         private String role; // "USER", "CAREGIVER", "STAFF"
         private String token; // JWT
+        private String name;
     }
 }
