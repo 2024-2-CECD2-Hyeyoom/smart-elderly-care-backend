@@ -18,7 +18,7 @@ public class SensorController {
 
     @PostMapping
     public void receiveSensorData(@RequestBody SensorDataDTO dto) {
-        log.info("센서 수신: {}, 측정값 개수: {}", dto.getSensor_type_name(), dto.getMeasurement_values().size());
+        log.info("Received sensors: {}, number of measurements: {}", dto.getSensor_type_name(), dto.getMeasurement_values().size());
         sensorDataService.add(dto); // 버퍼에 저장
     }
 }
